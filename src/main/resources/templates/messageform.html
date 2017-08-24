@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create/Edit a Message</title>
+</head>
+<body>
+<form action="#" th:action="@{/process}"
+      th:object="${message}"
+      method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div>
+        Tweet: <textarea rows="3" th:field="*{content}" />
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+    </div>
+    <div>
+        Posted Date: <input type="date" th:field="*{posteddate}" />
+        <span th:if="${#fields.hasErrors('posteddate')}" th:errors="*{posteddate}"></span>
+    </div>
+    <div>
+        Sent by: <input type="text" th:field="*{sentby}" />
+        <span th:if="${#fields.hasErrors('sentby')}" th:errors="*{sentby}"></span>
+    </div>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
