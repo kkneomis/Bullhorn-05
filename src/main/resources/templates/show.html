@@ -10,10 +10,11 @@
                 <a class="btn btn-success" href="/">Show all tweets</a>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        Content: <span th:text="${message.content}"></span> <br />
+                        <h4><span th:text="${message.content}"></span></h4> <br />
+                        <img th:src="${message.image}" class="img-responsive"/>
                     </div>
                     <div class="panel-footer">
-                        Posted on: <span th:text="${message.posteddate}"></span>
+                        Posted on: <span th:text="${#dates.format(message.posteddate, 'dd-MM-yyyy')}"></span>
                         By: <span th:text="${message.sentby}"></span>
                     </div>
                 </div>

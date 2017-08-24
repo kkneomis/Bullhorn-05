@@ -8,6 +8,7 @@
         <div class="col-md-8 col-md-offset-2">
             <form action="#" th:action="@{/process}"
                   th:object="${message}"
+                  enctype="multipart/form-data"
                   method="post">
                 <input class="form-control" type="hidden" th:field="*{id}" />
                 <div class="form-group">
@@ -17,13 +18,17 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" >Posted Date</label>
-                    <input class="form-control" type="date" th:field="*{posteddate}" />
+                    <input id="datePicker" class="form-control" type="date" th:field="*{posteddate}" />
                     <span th:if="${#fields.hasErrors('posteddate')}" th:errors="*{posteddate}"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label" >Sent by</label>
-                    <input type="text" th:field="*{sentby}" />
+                    <input class="form-control" type="text" th:field="*{sentby}" />
                     <span th:if="${#fields.hasErrors('sentby')}" th:errors="*{sentby}"></span>
+                </div>
+                <div class="form-group">
+                    <label  class="control-label" >Image</label>
+                    <input type="file" name="file" /><br /><br />
                 </div>
                 <input class="btn btn-success btn-block" type="submit" value="Submit" />
             </form>
@@ -33,5 +38,8 @@
 
 <nav th:replace="base :: footer"></nav>
 <th:block th:replace="base :: jslinks"></th:block>
+<script>
+    document.getElementById('datePicker').valueAsDate = new Date();
+</script>
 </body>
 </html>
