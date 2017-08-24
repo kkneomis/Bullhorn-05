@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bullhorn</title>
     <link href="/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-default" th:fragment="navbar">
@@ -22,7 +41,8 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-default " th:fragment="footer">
+
+<nav class="navbar navbar-default footer" th:fragment="footer">
     <div class="container">
         <ul class="nav navbar-nav">
             <li><a href="#">Copyright 2017 - Simeon Kakpovi</a> </li>
@@ -31,7 +51,7 @@
 </nav>
 <th:block th:fragment="jslinks">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </th:block>
 </body>
 </html>

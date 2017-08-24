@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: header"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h1>Error <br /> <small>Oops, something went wrong</small></h1>
+        </div>
+    </div>
+</div>
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>
