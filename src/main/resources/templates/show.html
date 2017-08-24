@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<head th:replace="base :: header"></head>
 <body>
-    <a href="/add">Add a Message</a>
-    <a href="/">Show all tweets</a>
-    <div>
-    Content: <span th:text="${message.content}"></span> <br />
+    <nav th:replace="base :: navbar"></nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <a class="btn btn-primary" href="/add">Add a Message</a>
+                <a class="btn btn-success" href="/">Show all tweets</a>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        Content: <span th:text="${message.content}"></span> <br />
+                    </div>
+                    <div class="panel-footer">
+                        Posted on: <span th:text="${message.posteddate}"></span>
+                        By: <span th:text="${message.sentby}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-    Posted on: <span th:text="${message.posteddate}"></span>
-    </div>
-    <div>
-    By: <span th:text="${message.sentby}"></span>
-    </div>
+
+    <nav th:replace="base :: footer"></nav>
+    <th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>

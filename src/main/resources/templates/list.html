@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<head th:replace="base :: header"></head>
 <body>
-<a href="/add">Add a Message</a>
-<div th:each="message : ${messages}">
-    <b th:text="${message.content}"></b>
-    <small th:inline="text">[[${message.sentby}]] on [[${message.posteddate}]]</small>
-    <a th:href="@{/edit/{id}(id=${message.id})}">Edit</a>
-    <a th:href="@{/messages/{id}(id=${message.id})}">View</a>
-    <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <a class="btn btn-primary" href="/add">Add a Message</a>
+
+            <div th:each="message : ${messages}">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <b th:text="${message.content}"></b><br/>
+                        <small th:inline="text">Posted by [[${message.sentby}]] on [[${message.posteddate}]]</small>
+                    </div>
+                    <div class="panel-footer">
+                        <a th:href="@{/edit/{id}(id=${message.id})}">Edit</a> -
+                        <a th:href="@{/messages/{id}(id=${message.id})}">View</a> -
+                        <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>
