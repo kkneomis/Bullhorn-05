@@ -20,7 +20,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByEmail(String email){
+    public Author findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
@@ -28,17 +28,17 @@ public class UserService {
         return userRepository.countByEmail(email);
     }
 
-    public User findByUsername(String username){
+    public Author findByUsername(String username){
         return userRepository.findByUsername(username);
     }
 
-    public void saveUser(User user){
+    public void saveUser(Author user){
         user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
         user.setEnabled(true);
         userRepository.save(user);
     }
 
-    public void saveAdmin(User user) {
+    public void saveAdmin(Author user) {
         user.setRoles(Arrays.asList(roleRepository.findByRole("ADMIN")));
         user.setEnabled(true);
         userRepository.save(user);

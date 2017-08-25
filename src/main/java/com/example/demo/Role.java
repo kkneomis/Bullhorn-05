@@ -15,7 +15,7 @@ public class Role {
     private String role;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Collection<User> users;
+    private Collection<Author> authors;
 
     public Role() {
     }
@@ -40,11 +40,11 @@ public class Role {
         this.role = role;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public Collection<Author> getUsers() {
+        return authors;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setUsers(Collection<Author> authors) {
+        this.authors = authors;
     }
 }

@@ -31,7 +31,7 @@ public class Message {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User owner;
+    private Author author;
 
 
     private String image;
@@ -70,11 +70,11 @@ public class Message {
     }
 
 
-    public User getOwner() {
-        return owner;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }

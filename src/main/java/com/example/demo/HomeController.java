@@ -38,7 +38,7 @@ public class HomeController {
         return "list";
     }
 
-    public User getCurrentUser(){
+    public Author getCurrentUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(auth.getName());
     }
@@ -59,8 +59,8 @@ public class HomeController {
             Map uploadResult = cloudc.upload(file.getBytes(),
                     ObjectUtils.asMap("resourcetype", "auto"));
             message.setImage(uploadResult.get("url").toString());
-            User currentUser = getCurrentUser();
-            message.setOwner(currentUser); //get logged in username
+            Author currentUser = getCurrentUser();
+            message.setAuthor(currentUser); //get logged in username
             message.setPosteddate(new Date());
             currentUser.addMessage(message);
             // Add message to user
@@ -99,12 +99,12 @@ public class HomeController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Author());
         return "registration";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user,
+    public String processRegistrationPage(@Valid @ModelAttribute("user") Author user,
                                           BindingResult result,
                                           Model model) {
         model.addAttribute("user", user);

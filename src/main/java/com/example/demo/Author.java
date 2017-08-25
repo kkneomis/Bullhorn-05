@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-public class User {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,16 +36,16 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User() {
+    public Author() {
     }
 
-    @OneToMany(mappedBy = "owner",
+    @OneToMany(mappedBy = "author",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     public Set<Message> messages;
 
 
-    public User(String email, String password, String firstname, String lastname, boolean enabled, String username) {
+    public Author(String email, String password, String firstname, String lastname, boolean enabled, String username) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
