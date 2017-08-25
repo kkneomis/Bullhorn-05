@@ -3,6 +3,8 @@ package com.example.demo;
 
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -23,10 +27,22 @@ public class HomeController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
+
     @RequestMapping("/")
     public String listMessages(Model model){
+
         model.addAttribute("messages", messageRepository.findAll());
         return "list";
+    }
+
+    public User getCurrentUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByUsername(auth.getName());
     }
 
     @GetMapping("/add")
@@ -45,6 +61,11 @@ public class HomeController {
             Map uploadResult = cloudc.upload(file.getBytes(),
                     ObjectUtils.asMap("resourcetype", "auto"));
             message.setImage(uploadResult.get("url").toString());
+            User currentUser = getCurrentUser();
+            message.setUser(currentUser); //get logged in username
+            message.setPosteddate(new Date());
+            currentUser.addMessage(message);
+            // Add message to user
             messageRepository.save(message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,6 +89,33 @@ public class HomeController {
     @RequestMapping("/delete/{id}")
     public String delMessage(@PathVariable("id") long id){
         messageRepository.delete(id);
+        return "redirect:/";
+    }
+
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String showRegistrationPage(Model model){
+        model.addAttribute("user", new User());
+        return "registration";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user,
+                                          BindingResult result,
+                                          Model model) {
+        model.addAttribute("user", user);
+        if (result.hasErrors()){
+            return "registration";
+        } else {
+            userService.saveUser(user);
+            model.addAttribute("message", "user Account Successfully Created");
+        }
         return "redirect:/";
     }
 

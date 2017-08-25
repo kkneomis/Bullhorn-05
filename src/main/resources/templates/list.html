@@ -6,13 +6,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <a class="btn btn-primary" href="/add">Add a Message</a>
-
+            <a class="btn btn-primary btn-block" href="/add">Add a Message</a>
+            <h3 th:text="${username}"></h3>
             <div th:each="message : ${messages}">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <b th:text="${message.content}"></b><br/>
-                        <small th:inline="text">Posted by [[${message.sentby}]] on [[${message.posteddate}]]</small>
+                        <small th:inline="text">Posted by [[${message.user.getUsername()}]] on [[${message.posteddate}]]</small>
                     </div>
                     <div class="panel-footer">
                         <a th:href="@{/edit/{id}(id=${message.id})}">Edit</a> -

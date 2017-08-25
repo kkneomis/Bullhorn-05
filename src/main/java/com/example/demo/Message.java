@@ -3,10 +3,7 @@ package com.example.demo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -25,9 +22,16 @@ public class Message {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date posteddate;
 
+    /*
     @NotNull
     @Size(min=4)
     private String sentby;
+    */
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "director_id")
+    private User user;
 
 
     private String image;
@@ -56,13 +60,6 @@ public class Message {
         this.posteddate = posteddate;
     }
 
-    public String getSentby() {
-        return sentby;
-    }
-
-    public void setSentby(String sentby) {
-        this.sentby = sentby;
-    }
 
     public String getImage() {
         return image;
@@ -70,5 +67,13 @@ public class Message {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

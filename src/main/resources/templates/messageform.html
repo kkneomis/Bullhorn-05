@@ -6,6 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h2>Create a tweet</h2>
             <form action="#" th:action="@{/process}"
                   th:object="${message}"
                   enctype="multipart/form-data"
@@ -15,16 +16,6 @@
                     <label class="control-label" >Tweet</label>
                     <input class="form-control input-lg" rows="3" th:field="*{content}" />
                     <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" >Posted Date</label>
-                    <input id="datePicker" class="form-control" type="date" th:field="*{posteddate}" />
-                    <span th:if="${#fields.hasErrors('posteddate')}" th:errors="*{posteddate}"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" >Sent by</label>
-                    <input class="form-control" type="text" th:field="*{sentby}" />
-                    <span th:if="${#fields.hasErrors('sentby')}" th:errors="*{sentby}"></span>
                 </div>
                 <div class="form-group">
                     <label  class="control-label" >Image</label>
