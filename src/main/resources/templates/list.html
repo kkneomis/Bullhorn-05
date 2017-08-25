@@ -12,7 +12,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <b th:text="${message.content}"></b><br/>
-                        <small th:inline="text">Posted by [[${message.user.getUsername()}]] on [[${message.posteddate}]]</small>
+                        <small th:inline="text">Posted by [[${message.owner.getUsername()}]] on [[${message.posteddate}]]</small>
                     </div>
                     <div class="panel-footer">
                         <a th:href="@{/edit/{id}(id=${message.id})}">Edit</a> -

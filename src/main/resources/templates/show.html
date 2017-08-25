@@ -15,7 +15,7 @@
                     </div>
                     <div class="panel-footer">
                         Posted on: <span th:text="${#dates.format(message.posteddate, 'dd-MM-yyyy')}"></span>
-                        By: <span th:text="${message.user.getUsername()}"></span>
+                        By: <span th:text="${message.owner.getUsername()}"></span>
                     </div>
                 </div>
             </div>

@@ -60,7 +60,7 @@ public class HomeController {
                     ObjectUtils.asMap("resourcetype", "auto"));
             message.setImage(uploadResult.get("url").toString());
             User currentUser = getCurrentUser();
-            message.setUser(currentUser); //get logged in username
+            message.setOwner(currentUser); //get logged in username
             message.setPosteddate(new Date());
             currentUser.addMessage(message);
             // Add message to user

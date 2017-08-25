@@ -30,8 +30,8 @@ public class Message {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "director_id")
-    private User user;
+    @JoinColumn(name = "user_id")
+    private User owner;
 
 
     private String image;
@@ -69,11 +69,12 @@ public class Message {
         this.image = image;
     }
 
-    public User getUser() {
-        return user;
+
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

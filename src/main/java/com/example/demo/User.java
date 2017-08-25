@@ -39,7 +39,7 @@ public class User {
     public User() {
     }
 
-    @OneToMany(mappedBy = "user",
+    @OneToMany(mappedBy = "owner",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     public Set<Message> messages;
